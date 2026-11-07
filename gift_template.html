@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Happy Diwali 🪔</title>
+<style>
+  :root { --gold:#ffd36b; --gold-soft:#ffe7a8; --card:rgba(255,255,255,.07); --line:rgba(255,211,107,.38); }
+  * { box-sizing:border-box; }
+  html, body { height:100%; margin:0; }
+  body {
+    font-family: Georgia, "Times New Roman", serif; color:var(--gold-soft); overflow-x:hidden;
+    background:
+      radial-gradient(ellipse at 50% 108%, rgba(255,140,40,.42) 0%, rgba(255,90,30,.12) 38%, transparent 62%),
+      radial-gradient(ellipse at 50% -10%, #5b1a52 0%, #2b0c3f 42%, #0d0517 100%);
+    background-attachment: fixed;
+    display:flex; align-items:center; justify-content:center;
+    padding: calc(env(safe-area-inset-top) + 70px) 16px calc(env(safe-area-inset-bottom) + 84px);
+    min-height:100%;
+  }
+  .hidden { display:none !important; }
+
+  /* ----- background layers ----- */
+  #fw { position:fixed; inset:0; z-index:0; pointer-events:none; }
+  .stars, .stars i { position:fixed; pointer-events:none; }
+  .stars { inset:0; z-index:0; overflow:hidden; }
+  .stars i { width:3px; height:3px; border-radius:50%; background:#fff; opacity:0; animation:twinkle 4s ease-in-out infinite; box-shadow:0 0 6px 1px rgba(255,255,255,.7); }
+  @keyframes twinkle { 0%,100%{opacity:0;transform:scale(.5)} 50%{opacity:.9;transform:scale(1)} }
+  .mandala {
+    position:fixed; left:50%; top:50%; width:150vmin; height:150vmin; margin:-75vmin 0 0 -75vmin; border-radius:50%; z-index:0; pointer-events:none;
+    background:repeating-conic-gradient(from 0deg, rgba(255,170,60,.06) 0 5deg, transparent 5deg 10deg);
+    -webkit-mask:radial-gradient(circle, transparent 20%, #000 21%, #000 58%, transparent 59%);
+            mask:radial-gradient(circle, transparent 20%, #000 21%, #000 58%, transparent 59%);
+    animation:spin 160s linear infinite;
+  }
+  @keyframes spin { to { transform:rotate(360deg); } }
+  .lantern { position:fixed; top:0; z-index:2; font-size:clamp(38px,9vw,58px); transform-origin:top center; animation:swing 4s ease-in-out infinite; filter:drop-shadow(0 0 16px rgba(255,150,40,.8)); pointer-events:none; padding-top:34px; }
+  .lantern::before { content:""; position:absolute; left:50%; top:0; width:2px; height:34px; background:linear-gradient(#ffd36b,#a8741a); }
+  .lantern.l { left:4%; } .lantern.r { right:4%; animation-delay:-2s; } .lantern.l2 { left:17%; font-size:clamp(28px,6vw,40px); animation-delay:-1s; } .lantern.r2 { right:17%; font-size:clamp(28px,6vw,40px); animation-delay:-3s; }
+  @keyframes swing { 0%,100%{transform:rotate(6deg)} 50%{transform:rotate(-6deg)} }
+  .diyas { position:fixed; left:0; right:0; bottom:calc(env(safe-area-inset-bottom) + 8px); z-index:2; display:flex; justify-content:center; gap:clamp(14px,5vw,44px); pointer-events:none; }
+  .diyas span { font-size:clamp(26px,6vw,38px); filter:drop-shadow(0 0 12px rgba(255,160,40,.95)); animation:flicker 2.4s ease-in-out infinite; }
+  .diyas span:nth-child(2n) { animation-delay:-.8s; } .diyas span:nth-child(3n) { animation-delay:-1.6s; }
+  .diyas span:nth-child(n+6) { display:none; } @media (min-width:700px){ .diyas span:nth-child(n+6){ display:inline; } }
+  @keyframes flicker { 0%,100%{transform:scale(1)} 40%{transform:scale(1.07) rotate(-2deg)} 70%{transform:scale(.97) rotate(2deg)} }
+
+  /* ----- screens ----- */
+  .screen { width:100%; max-width:600px; text-align:center; position:relative; z-index:1; }
+  @keyframes rise { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:none} }
+
+  .gate { padding:38px 26px; border:1px solid var(--line); border-radius:26px; background:var(--card); backdrop-filter:blur(7px); -webkit-backdrop-filter:blur(7px);
+          box-shadow:0 20px 60px rgba(0,0,0,.5), inset 0 0 40px rgba(255,211,107,.06); animation:rise .9s ease both; }
+  .diya { font-size:64px; line-height:1; display:inline-block; animation:flicker 2.4s ease-in-out infinite; filter:drop-shadow(0 0 18px rgba(255,170,40,.9)); }
+  h1 { font-size:clamp(26px,6.4vw,38px); margin:14px 0 6px; font-weight:normal; color:var(--gold); text-shadow:0 0 22px rgba(255,170,40,.45); }
+  p.sub { margin:0 0 24px; opacity:.88; font-size:17px; font-style:italic; }
+  form { display:flex; flex-direction:column; gap:14px; align-items:center; }
+  input[type=text] { width:100%; max-width:360px; padding:15px 18px; font-size:18px; text-align:center; color:#fff; background:rgba(0,0,0,.38); border:1px solid var(--line); border-radius:14px; outline:none; font-family:inherit; transition:border-color .2s, box-shadow .2s; }
+  input[type=text]::placeholder { color:rgba(255,231,168,.45); }
+  input[type=text]:focus { border-color:var(--gold); box-shadow:0 0 0 3px rgba(255,211,107,.2); }
+  button { font-family:inherit; font-size:17px; letter-spacing:.5px; cursor:pointer; padding:13px 34px; border-radius:999px; border:none; color:#3a1300; background:linear-gradient(135deg,#ffe08a,#ffb347); box-shadow:0 8px 24px rgba(255,170,40,.35); transition:transform .15s, box-shadow .15s, opacity .2s; }
+  button:hover { transform:translateY(-1px); box-shadow:0 10px 28px rgba(255,170,40,.5); }
+  button:disabled { opacity:.6; cursor:wait; transform:none; }
+  button.ghost { background:rgba(0,0,0,.25); color:var(--gold); border:1px solid var(--line); box-shadow:none; padding:10px 22px; font-size:15px; }
+  .note { margin-top:18px; min-height:24px; font-size:16px; color:#ffb3a7; }
+
+  /* wish (kisi aur naam ke liye) */
+  .wish { animation:rise 1.1s ease both; padding:10px 6px; }
+  .wish .diya { font-size:clamp(70px,18vw,104px); }
+  .wish h2 { font-size:clamp(34px,9vw,62px); font-weight:normal; margin:10px 0 14px; line-height:1.12;
+             background:linear-gradient(180deg,#fff3c4 0%,#ffd36b 45%,#ff9d3b 100%); -webkit-background-clip:text; background-clip:text; color:transparent; -webkit-text-fill-color:transparent;
+             filter:drop-shadow(0 0 22px rgba(255,160,40,.55)); }
+  .wish h2 .em { -webkit-text-fill-color:initial; color:initial; background:none; }
+  .wish p.msg { font-size:clamp(17px,4.2vw,22px); line-height:1.6; font-style:italic; margin:0 auto 14px; max-width:30em; color:#ffeccb; text-shadow:0 2px 12px rgba(0,0,0,.6); }
+  .wish p.from { font-size:clamp(16px,3.8vw,19px); margin:0 0 22px; color:var(--gold); }
+  .wish .buttons { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+
+  /* rangoli (sirf Baljeet ke liye) */
+  #stage { width:100%; max-width:none; align-self:flex-start; }
+  .stage-wrap { width:min(94vw,1000px); margin-inline:auto; animation:rise 1s ease both; }
+  .frame { padding:10px; border-radius:18px; background:rgba(0,0,0,.38); border:1px solid var(--line); box-shadow:0 0 70px rgba(255,170,40,.3), 0 20px 60px rgba(0,0,0,.6); }
+  canvas#cv { display:block; width:100%; height:auto; border-radius:10px; background:#000; }
+  .progress { height:3px; margin-top:14px; background:rgba(255,255,255,.1); border-radius:3px; overflow:hidden; }
+  .progress b { display:block; height:100%; width:0; background:linear-gradient(90deg,#ffe08a,#ff9d3b); }
+  .reveal { opacity:0; transform:translateY(10px); transition:opacity 1.2s ease, transform 1.2s ease; margin-top:22px; }
+  .reveal.on { opacity:1; transform:none; }
+  .greet { font-size:clamp(26px,5.5vw,40px); color:var(--gold); margin:0 0 8px; font-weight:normal; text-shadow:0 0 24px rgba(255,170,40,.6); }
+  .rmsg { font-size:clamp(16px,3.4vw,20px); font-style:italic; margin:0 0 18px; opacity:.92; }
+</style>
+</head>
+<body>
+<canvas id="fw"></canvas>
+<div class="stars" id="stars"></div>
+<div class="mandala"></div>
+<div class="lantern l">🏮</div><div class="lantern l2">🏮</div><div class="lantern r2">🏮</div><div class="lantern r">🏮</div>
+<div class="diyas"><span>🪔</span><span>🪔</span><span>🪔</span><span>🪔</span><span>🪔</span><span>🪔</span><span>🪔</span></div>
+
+<!-- Step 1: first name puchho -->
+<main class="screen gate" id="gate">
+  <div class="diya">🪔</div>
+  <h1>Happy Diwali!</h1>
+  <p class="sub">Enter your first name to open your Diwali surprise</p>
+  <form id="form" autocomplete="off">
+    <input id="name" type="text" placeholder="Your first name" autocomplete="off" autocapitalize="words" spellcheck="false" required>
+    <button id="go" type="submit">Open</button>
+  </form>
+  <div class="note" id="note" aria-live="polite"></div>
+</main>
+
+<!-- Step 2a: kisi aur ke liye - Happy Diwali wish -->
+<section class="screen wish hidden" id="wish">
+  <div class="diya">🪔</div>
+  <h2 id="wTitle"></h2>
+  <p class="msg" id="wMsg"></p>
+  <p class="from" id="wFrom"></p>
+  <div class="buttons"><button id="moreFw" type="button">🎆 More fireworks</button></div>
+</section>
+
+<!-- Step 2b: Baljeet ke liye - rangoli -->
+<section class="screen hidden" id="stage">
+  <div class="stage-wrap">
+    <div class="frame"><canvas id="cv"></canvas></div>
+    <div class="progress"><b id="bar"></b></div>
+    <div class="reveal" id="reveal">
+      <h2 class="greet" id="greet"></h2>
+      <p class="rmsg" id="rmsg"></p>
+      <button class="ghost" id="replay" type="button">↻ Watch again</button>
+    </div>
+  </div>
+</section>
+
+<script>
+const BOX  = __GIFT_JSON__;
+const WISH = __WISH_JSON__;
+
+/* ---------------- helpers ---------------- */
+const $ = id => document.getElementById(id);
+const b64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const normName = s => s.normalize("NFC").toLowerCase().trim().split(/\s+/).join(" ");
+const titleCase = s => s.trim().split(/\s+/).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(" ");
+const rand = (a, b) => a + Math.random() * (b - a);
+
+(() => { const h = $("stars"); for (let i = 0; i < 40; i++) { const s = document.createElement("i");
+  s.style.left = Math.random()*100 + "%"; s.style.top = Math.random()*70 + "%";
+  s.style.animationDelay = Math.random()*4 + "s"; s.style.animationDuration = (3+Math.random()*3) + "s"; h.appendChild(s); } })();
+
+/* ---------------- fireworks (background) ---------------- */
+const FW = (() => {
+  const cv = $("fw"), ctx = cv.getContext("2d");
+  const COLORS = [[255,211,107],[255,140,60],[255,90,140],[120,220,255],[170,255,120],[255,255,255],[200,140,255]];
+  let W = 0, H = 0, rockets = [], parts = [], running = false, last = 0, nextAuto = 0, rate = 1.0;
+  function resize() {
+    const dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = innerWidth; H = innerHeight; cv.width = W*dpr; cv.height = H*dpr;
+    cv.style.width = W + "px"; cv.style.height = H + "px"; ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  addEventListener("resize", resize); resize();
+  function launch() {
+    const x = rand(.12, .88) * W, ty = rand(.12, .5) * H, g = .12;
+    rockets.push({ x, y: H, vx: rand(-.6, .6), vy: -Math.sqrt(2*g*(H - ty)), g, col: COLORS[(Math.random()*COLORS.length)|0] });
+  }
+  function explode(x, y, col) {
+    const n = 70 + (Math.random()*50|0), ring = Math.random() < .35, c2 = COLORS[(Math.random()*COLORS.length)|0];
+    for (let i = 0; i < n; i++) {
+      const a = Math.random()*6.2832, sp = ring ? 3.6 : rand(1, 5);
+      parts.push({ x, y, vx: Math.cos(a)*sp, vy: Math.sin(a)*sp, life: 1, dec: rand(.008,.016), col: i % 3 ? col : c2 });
+    }
+  }
+  function loop(ts) {
+    if (!running) return;
+    const k = Math.min(3, (ts - (last || ts)) / 16.667); last = ts;
+    ctx.globalCompositeOperation = "destination-out"; ctx.fillStyle = "rgba(0,0,0," + Math.min(.5, .2*k) + ")"; ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = "lighter";
+    if (ts > nextAuto) { launch(); if (Math.random() < .35) launch(); nextAuto = ts + rand(500, 1500) / rate; }
+    for (let i = rockets.length - 1; i >= 0; i--) {
+      const r = rockets[i]; r.x += r.vx*k; r.y += r.vy*k; r.vy += r.g*k;
+      ctx.fillStyle = "rgba(255,230,170,.9)"; ctx.beginPath(); ctx.arc(r.x, r.y, 2, 0, 6.2832); ctx.fill();
+      if (r.vy >= -1) { explode(r.x, r.y, r.col); rockets.splice(i, 1); }
+    }
+    for (let i = parts.length - 1; i >= 0; i--) {
+      const p = parts[i]; p.x += p.vx*k; p.y += p.vy*k; p.vy += .04*k; p.vx *= Math.pow(.985, k); p.vy *= Math.pow(.985, k); p.life -= p.dec*k;
+      if (p.life <= 0) { parts.splice(i, 1); continue; }
+      ctx.fillStyle = "rgba(" + p.col[0] + "," + p.col[1] + "," + p.col[2] + "," + p.life + ")";
+      ctx.beginPath(); ctx.arc(p.x, p.y, 1.7, 0, 6.2832); ctx.fill();
+    }
+    requestAnimationFrame(loop);
+  }
+  return {
+    start(r) { rate = r || 1; if (!running) { running = true; last = 0; requestAnimationFrame(loop); } },
+    stop() { running = false; rockets = []; parts = []; ctx.clearRect(0, 0, W, H); },
+    burst(n) { for (let i = 0; i < n; i++) setTimeout(launch, i * 180); }
+  };
+})();
+FW.start(0.8);
+
+/* ---------------- unlock: sahi naam = decrypt ---------------- */
+async function tryName(candidate, salt) {
+  const mat = await crypto.subtle.importKey("raw", new TextEncoder().encode(candidate), "PBKDF2", false, ["deriveKey"]);
+  const wrapKey = await crypto.subtle.deriveKey({ name: "PBKDF2", salt, iterations: BOX.iter, hash: "SHA-256" },
+                    mat, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+  for (const w of BOX.wraps) {
+    try { return await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64(w.iv) }, wrapKey, b64(w.ct)); } catch (e) {}
+  }
+  return null;
+}
+async function unlock(typed) {
+  if (!window.crypto || !crypto.subtle) throw new Error("nocrypto");
+  const salt = b64(BOX.salt), full = normName(typed), first = full.split(" ")[0];
+  let raw = await tryName(first, salt);
+  if (!raw && full !== first) raw = await tryName(full, salt);     // poora naam bhi chalega
+  if (!raw) throw new Error("wrong");
+  const dataKey = await crypto.subtle.importKey("raw", raw, "AES-GCM", false, ["decrypt"]);
+  const plain = new Uint8Array(await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64(BOX.iv) }, dataKey, b64(BOX.ct)));
+  const dv = new DataView(plain.buffer), metaLen = dv.getUint32(0, true);
+  const meta = JSON.parse(new TextDecoder().decode(plain.subarray(4, 4 + metaLen)));
+  return { meta, dv, offset: 4 + metaLen };
+}
+
+/* ---------------- rangoli animation ---------------- */
+let anim = null;
+function playRangoli(gift) {
+  const { meta, dv, offset } = gift;
+  const cv = $("cv"), ctx = cv.getContext("2d"), bar = $("bar"), reveal = $("reveal");
+  cv.width = meta.w; cv.height = meta.h;
+  ctx.fillStyle = "#000"; ctx.fillRect(0, 0, meta.w, meta.h);
+  reveal.classList.remove("on"); bar.style.width = "0%";
+  FW.stop();                                   // drawing ke time fireworks band (smooth chale)
+  const total = meta.n, durMs = meta.duration * 1000;
+  let drawn = 0, t0 = null;
+  if (anim) cancelAnimationFrame(anim);
+  function frame(ts) {
+    if (t0 === null) t0 = ts;
+    const p = Math.min(1, (ts - t0) / durMs);
+    const target = Math.floor(total * (p < 1 ? (1 - Math.pow(1 - p, 1.6)) * 0.4 + p * 0.6 : 1));
+    while (drawn < target) {
+      const o = offset + drawn * 7;
+      const x = dv.getUint16(o, true) / 4, y = dv.getUint16(o + 2, true) / 4;
+      ctx.fillStyle = "rgb(" + dv.getUint8(o + 4) + "," + dv.getUint8(o + 5) + "," + dv.getUint8(o + 6) + ")";
+      ctx.beginPath(); ctx.arc(x, y, drawn < meta.nMain ? meta.rMain : meta.rDetail, 0, 6.2832); ctx.fill();
+      drawn++;
+    }
+    bar.style.width = (drawn / total * 100) + "%";
+    if (drawn < total) anim = requestAnimationFrame(frame);
+    else setTimeout(() => { reveal.classList.add("on"); FW.start(1.6); FW.burst(4); }, 300);   // ho gaya: celebration!
+  }
+  anim = requestAnimationFrame(frame);
+}
+
+/* ---------------- UI ---------------- */
+let currentGift = null;
+function showWish(first) {
+  $("gate").classList.add("hidden"); $("wish").classList.remove("hidden");
+  const t = WISH.title.replace("{name}", first), m = t.match(/^([\s\S]*?)([\s\u200d\ufe0f\p{Extended_Pictographic}]*)$/u);
+  const wt = $("wTitle"); wt.textContent = m[1].trim();
+  if (m[2].trim()) { const em = document.createElement("span"); em.className = "em"; em.textContent = " " + m[2].trim(); wt.appendChild(em); }
+  $("wMsg").textContent = WISH.message;
+  $("wFrom").textContent = WISH.from || "";
+  FW.start(1.5); FW.burst(5);
+}
+$("form").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const typed = $("name").value;
+  if (!typed.trim()) return;
+  const btn = $("go"), note = $("note"), first = titleCase(typed.trim().split(/\s+/)[0]);
+  btn.disabled = true; btn.textContent = "Opening…"; note.textContent = "";
+  try {
+    currentGift = await unlock(typed);                        // Baljeet!
+    $("gate").classList.add("hidden"); $("stage").classList.remove("hidden");
+    $("greet").textContent = currentGift.meta.greeting.replace("{name}", first);
+    $("rmsg").textContent = currentGift.meta.message;
+    playRangoli(currentGift);
+  } catch (err) {
+    if (err.message === "nocrypto") {
+      note.textContent = "Please open this link in a modern browser (Chrome / Safari).";
+      btn.disabled = false; btn.textContent = "Open";
+    } else {
+      showWish(first);                                         // koi aur: Happy Diwali wish
+    }
+  }
+});
+$("replay").addEventListener("click", () => { if (currentGift) { playRangoli(currentGift); } });
+$("moreFw").addEventListener("click", () => FW.burst(6));
+$("name").focus();
+</script>
+</body>
+</html>
