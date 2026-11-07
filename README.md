@@ -1,4 +1,4 @@
-# 🪔 Happy Diwali — A Name-Keyed Surprise
+# 🪔 Happy Diwali — A Name-Keyed Surprise 2K26
 
 A small festive greeting page made to wish people **Happy Diwali**. Everyone who opens it can enter a name and see a warm festive wish. One specially chosen name unlocks the personal gift: a photo that is drawn onscreen as a colorful rangoli.
 
