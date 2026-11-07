@@ -27,7 +27,7 @@ The page is a single, self-contained HTML file. It includes a starry night, glow
 
 ## 🚀 Open the page
 
-**Live site:** [love-surprise-by-ankit.netlify.app](https://love-surprise-by-ankit.netlify.app/)
+**Live site:** [diwali-surprise-by-ankit.netlify.app](https://diwali-surprise-by-ankit.netlify.app/)
 
 Open `index.html` in a modern browser. No web server or backend is needed for the existing page.
 
