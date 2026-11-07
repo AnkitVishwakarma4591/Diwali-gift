@@ -75,6 +75,20 @@
   .wish p.from { font-size:clamp(16px,3.8vw,19px); margin:0 0 22px; color:var(--gold); }
   .wish .buttons { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
 
+  /* animated not-the-lucky-one message */
+  .surprise-overlay { position:fixed; inset:0; z-index:10; display:grid; place-items:center; padding:20px; background:rgba(8,3,15,.72); backdrop-filter:blur(6px); opacity:0; transition:opacity .35s ease; }
+  .surprise-overlay.hidden { display:none !important; }
+  .surprise-overlay.on { opacity:1; }
+  .surprise-card { width:min(100%,430px); padding:30px 26px 26px; border:1px solid rgba(255,211,107,.6); border-radius:24px; background:linear-gradient(145deg,rgba(73,25,71,.97),rgba(25,9,35,.98)); box-shadow:0 0 55px rgba(255,150,40,.28),0 24px 70px rgba(0,0,0,.6); text-align:center; transform:translateY(22px) scale(.92); opacity:0; }
+  .surprise-overlay.on .surprise-card { animation:surprise-in .55s cubic-bezier(.2,.8,.2,1) forwards; }
+  @keyframes surprise-in { to { transform:translateY(0) scale(1); opacity:1; } }
+  .surprise-icon { display:inline-block; font-size:52px; filter:drop-shadow(0 0 14px rgba(255,170,40,.75)); animation:surprise-float 1.8s ease-in-out infinite; }
+  @keyframes surprise-float { 50% { transform:translateY(-7px) rotate(5deg); } }
+  .surprise-card h2 { margin:12px 0 10px; color:var(--gold); font-size:clamp(25px,7vw,32px); font-weight:normal; text-shadow:0 0 18px rgba(255,170,40,.35); }
+  .surprise-card p { margin:0 auto 22px; max-width:29em; color:#ffeccb; font-size:17px; line-height:1.55; }
+  .surprise-card button { min-width:150px; }
+  @media (prefers-reduced-motion:reduce) { .surprise-icon { animation:none; } .surprise-overlay.on .surprise-card { animation:none; transform:none; opacity:1; } }
+
   /* rangoli (sirf Baljeet ke liye) */
   #stage { width:100%; max-width:none; align-self:flex-start; }
   .stage-wrap { width:min(94vw,1000px); margin-inline:auto; animation:rise 1s ease both; }
@@ -115,6 +129,15 @@
   <p class="from" id="wFrom"></p>
   <div class="buttons"><button id="moreFw" type="button">🎆 More fireworks</button></div>
 </section>
+
+<div class="surprise-overlay hidden" id="surprise" role="dialog" aria-modal="true" aria-labelledby="surpriseTitle">
+  <div class="surprise-card">
+    <div class="surprise-icon" aria-hidden="true">✨</div>
+    <h2 id="surpriseTitle">Not the lucky one…</h2>
+    <p>Sorry, this surprise is meant for someone special. Keep celebrating—and maybe try again next time! 🪔</p>
+    <button id="closeSurprise" type="button">Keep celebrating</button>
+  </div>
+</div>
 
 <!-- Step 2b: Baljeet ke liye - rangoli -->
 <section class="screen hidden" id="stage">
@@ -256,6 +279,7 @@ function showWish(first) {
   $("wMsg").textContent = WISH.message;
   $("wFrom").textContent = WISH.from || "";
   FW.start(1.5); FW.burst(5);
+  setTimeout(() => { const popup = $("surprise"); popup.classList.remove("hidden"); requestAnimationFrame(() => popup.classList.add("on")); $("closeSurprise").focus(); }, 2200);
 }
 $("form").addEventListener("submit", async (e) => {
   e.preventDefault();
@@ -280,6 +304,7 @@ $("form").addEventListener("submit", async (e) => {
 });
 $("replay").addEventListener("click", () => { if (currentGift) { playRangoli(currentGift); } });
 $("moreFw").addEventListener("click", () => FW.burst(6));
+$("closeSurprise").addEventListener("click", () => { const popup = $("surprise"); popup.classList.remove("on"); setTimeout(() => popup.classList.add("hidden"), 360); });
 $("name").focus();
 </script>
 </body>
