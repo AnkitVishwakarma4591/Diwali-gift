@@ -27,6 +27,8 @@ The page is a single, self-contained HTML file. It includes a starry night, glow
 
 ## 🚀 Open the page
 
+**Live site:** [love-surprise-by-ankit.netlify.app](https://love-surprise-by-ankit.netlify.app/)
+
 Open `index.html` in a modern browser. No web server or backend is needed for the existing page.
 
 For best results, use a recent browser with Web Crypto support. The unlock uses browser cryptography, so if opening the file directly does not work in your browser, serve this folder locally:
